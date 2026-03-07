@@ -5,7 +5,7 @@ from src.models.task import Task
 
 
 class DSource:
-    """Простой источник для проверки контракта."""
+    """Источник для проверки контракта."""
 
     def get_tasks(self) -> list[Task]:
         """Вернуть одну тестовую задачу.
@@ -19,7 +19,7 @@ class TestContracts(unittest.TestCase):
     """Тесты для проверки контрактов источников задач."""
 
     def test_d_source_task(self):
-        """Проверить, что DSource удовлетворяет протоколу TaskSource."""
+        """DSource удовлетворяет протоколу TaskSource."""
         source = DSource()
         self.assertIsInstance(source, TaskSource)
 

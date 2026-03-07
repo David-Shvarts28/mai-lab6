@@ -30,7 +30,8 @@ class CSource:
 class TestTaskCollector(unittest.TestCase):
 
     def test_collector_acc_valid_sour(self):
-        """Проверить, что коллектор принимает корректные источники."""
+        """Коллектор принимает корректные источники."""
+
         collector = TaskCollector()
 
         gen_source = GeneratedTaskSource(count=2)
@@ -49,7 +50,8 @@ class TestTaskCollector(unittest.TestCase):
         self.assertIn("b", ids)
 
     def test_collector_rej_inval_sour(self):
-        """Проверить, что коллектор отклоняет некорректный источник."""
+        """Коллектор отклоняет некорректный источник."""
+
         collector = TaskCollector()
 
         class NotASource:

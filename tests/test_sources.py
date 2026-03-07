@@ -22,7 +22,7 @@ class TestSources(unittest.TestCase):
         self.assertEqual(tasks[1].payload["number"], 1)
 
     def test_file_task_source(self):
-        """Проверить чтение задач из файла."""
+        """Чтение задач из файла."""
         raw_tasks = [
             {"id": "1", "payload": {"value": 10}},
             {"id": "2", "payload": {"value": 20}},
@@ -58,18 +58,18 @@ class TestSources(unittest.TestCase):
         self.assertTrue(tasks[0].payload["ok"])
 
     def test_generator_ploho_count(self):
-        """Проверить, что отрицательное count вызывает ошибку."""
+        """Отрицательное count вызывает ошибку."""
         with self.assertRaises(ValueError):
             GeneratedTaskSource(count=-1)
 
     def test_file_not_found(self):
-        """Проверить ошибку при отсутствии файла."""
+        """Ошибку при отсутствии файла."""
         source = FileTaskSource("non_existent_file.jsonl")
         with self.assertRaises(IOError):
             source.get_tasks()
 
     def test_file_invalid_json(self):
-        """Проверить ошибку при неверном формате JSON."""
+        """Ошибку при неверном формате JSON."""
         with tempfile.TemporaryDirectory() as tmpdir:
             file_path = Path(tmpdir) / "invalid.jsonl"
             with open(file_path, "w", encoding="utf-8") as f:
