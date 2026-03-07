@@ -4,7 +4,7 @@ from src.contracts.source_protocol import TaskSource
 from src.models.task import Task
 
 
-class DummySource:
+class DSource:
     """Простой источник для проверки контракта."""
 
     def get_tasks(self) -> list[Task]:
@@ -12,15 +12,15 @@ class DummySource:
 
         :return: список из одной задачи
         """
-        return [Task(id="dummy", payload={})]
+        return [Task(id="d", payload={})]
 
 
 class TestContracts(unittest.TestCase):
     """Тесты для проверки контрактов источников задач."""
 
-    def test_dummy_source_is_task_source(self):
-        """Проверить, что DummySource удовлетворяет протоколу TaskSource."""
-        source = DummySource()
+    def test_d_source_task(self):
+        """Проверить, что DSource удовлетворяет протоколу TaskSource."""
+        source = DSource()
         self.assertIsInstance(source, TaskSource)
 
 

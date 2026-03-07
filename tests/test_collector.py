@@ -6,7 +6,7 @@ from src.orchestrator.task_collector import TaskCollector
 from src.sources.generator_source import GeneratedTaskSource
 
 
-class CustomSource:
+class CSource:
     """Пользовательский источник задач для тестов."""
 
     def __init__(self, ids):
@@ -29,12 +29,12 @@ class CustomSource:
 
 class TestTaskCollector(unittest.TestCase):
 
-    def test_collector_accepts_valid_sources(self):
+    def test_collector_acc_valid_sour(self):
         """Проверить, что коллектор принимает корректные источники."""
         collector = TaskCollector()
 
         gen_source = GeneratedTaskSource(count=2)
-        custom_source = CustomSource(ids=["a", "b"])
+        custom_source = CSource(ids=["a", "b"])
 
         collector.add_source(gen_source)
         collector.add_source(custom_source)
@@ -48,7 +48,7 @@ class TestTaskCollector(unittest.TestCase):
         self.assertIn("a", ids)
         self.assertIn("b", ids)
 
-    def test_collector_rejects_invalid_source(self):
+    def test_collector_rej_inval_sour(self):
         """Проверить, что коллектор отклоняет некорректный источник."""
         collector = TaskCollector()
 
@@ -60,9 +60,8 @@ class TestTaskCollector(unittest.TestCase):
         with self.assertRaises(TypeError):
             collector.add_source(bad_source)
 
-    def test_custom_source_is_instance_of_protocol(self):
-        """Проверить, что CustomSource удовлетворяет протоколу TaskSource."""
-        custom = CustomSource(ids=["x"])
+    def test_source_is_instance(self):
+        custom = CSource(ids=["x"])
         self.assertIsInstance(custom, TaskSource)
 
 

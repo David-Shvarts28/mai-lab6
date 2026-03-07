@@ -12,8 +12,7 @@ from src.sources.generator_source import GeneratedTaskSource
 class TestSources(unittest.TestCase):
     """Набор тестов для источников задач."""
 
-    def test_generated_task_source_basic(self):
-        """Проверить базовую генерацию задач."""
+    def test_generated_task(self):
         source = GeneratedTaskSource(count=3)
         tasks = source.get_tasks()
 
@@ -22,7 +21,7 @@ class TestSources(unittest.TestCase):
         self.assertEqual(tasks[0].id, "generated-0")
         self.assertEqual(tasks[1].payload["number"], 1)
 
-    def test_file_task_source_reads_tasks(self):
+    def test_file_task_source(self):
         """Проверить чтение задач из файла."""
         raw_tasks = [
             {"id": "1", "payload": {"value": 10}},
@@ -43,8 +42,7 @@ class TestSources(unittest.TestCase):
         self.assertEqual(tasks[0].id, "1")
         self.assertEqual(tasks[0].payload["value"], 10)
 
-    def test_api_stub_task_source_works(self):
-        """Проверить получение задач из API-заглушки."""
+    def test_api_task_works(self):
 
         def fake_api():
             return [
@@ -59,7 +57,7 @@ class TestSources(unittest.TestCase):
         self.assertEqual(tasks[0].id, "api-1")
         self.assertTrue(tasks[0].payload["ok"])
 
-    def test_generator_negative_count(self):
+    def test_generator_ploho_count(self):
         """Проверить, что отрицательное count вызывает ошибку."""
         with self.assertRaises(ValueError):
             GeneratedTaskSource(count=-1)
@@ -75,7 +73,7 @@ class TestSources(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             file_path = Path(tmpdir) / "invalid.jsonl"
             with open(file_path, "w", encoding="utf-8") as f:
-                f.write("не json строка\n")
+                f.write("Это не json строка, харам!\n")
 
             source = FileTaskSource(str(file_path))
             with self.assertRaises(json.JSONDecodeError):
