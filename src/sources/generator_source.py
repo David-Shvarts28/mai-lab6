@@ -27,3 +27,4 @@ class GeneratedTaskSource:
             task_id = f"generated-{i}"
             payload = {"number": i}
             tasks.append(Task(id=task_id, payload=payload)) #type: ignore
+        return tasks
